@@ -26,23 +26,22 @@
 
 body{
     background-color: var(--backgroud-one);
+    height: 100vh;
+    width: 100vw;
 }
 
-section{
-    margin-left: 1rem;
-    margin-right: 1rem;
+section{   
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    min-height: 100vh;    
+    justify-content: center;      
 }
 
 section::before{
     content: "";
     position: absolute;
     top: 0px;
-    left: 0px;
+    left: 50px;
     width: 100%;
     height: 100%;
     background: var(--backgroud-two);
@@ -61,13 +60,13 @@ section::before{
 
 h1{
     color: var(--color-one);
-    padding: 15px;
+    padding: 30px;
     font-size: 2rem;
 }
-.container{
-    max-width: 500px;       
-    margin: 30px auto;
+.container{    
+    max-width: 400px;    
     padding: 20px;
+    margin-bottom: 50px;
     border-radius: 4px;
     background: var(--backgroud-tree);
     overflow: hidden;
@@ -243,7 +242,7 @@ input[type='number']::placeholder{
     opacity: 1;
 }
 
-@media (max-width:500px) {
+@media (max-width:500px) {   
     h1,h2{
         font-size: 1.5rem;
     }
@@ -260,12 +259,24 @@ input[type='number']::placeholder{
         display: block;
         font-size: 11px;
     }
+    
+    section::before{        
+        top: 50px;
+        left: -70px;        
+        min-width: 100%;
+        min-height: 100%;        
+    }   
 
-    section::before{
-        top: 50px;        
-        left: -200px;
-        width: 800px;
-        height: 800px;
+    section::after{
+        content: "";
+        position: absolute;
+        top: 60px;
+        right: 40px;        
+        min-width: 100%;
+        min-height: 100%;
+        background: var(--backgroud-two);
+        clip-path: polygon(30% 10%, 50% 40%, 30% 75%, 20% 40%);
+        animation: up 2.5s ease 1.5s infinite alternate;
     }
 
 }
