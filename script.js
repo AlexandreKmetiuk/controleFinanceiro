@@ -7,15 +7,14 @@ const inputName = document.querySelector('#name');
 const inputValor = document.querySelector('#valor');
 
 
-
-const localStorageTransacoes = JSON.parse(localStorage.getItem('transacao'))
-let transacao = localStorage.getItem('transacao') !== null ? localStorageTransacoes : []
+const localStorageTransacoes = JSON.parse(localStorage.getItem('bdTransacoes'))
+let bdTransacoes = localStorage.getItem('bdTransacoes') !== null ? localStorageTransacoes : []
 
 const removerTransacoes = ID => {
-    transacao.filter(transacoes => transacoes.id !== ID)
+    bdTransacoes = bdTransacoes.filter(transacoes => transacoes.id !== ID)
     atualizarLocalStorage()
     init()
-} 
+}
 
 const adicionarTransacaoDom = transacoes => {
     const operador = transacoes.valor < 0 ? '-' : '+'
@@ -24,14 +23,14 @@ const adicionarTransacaoDom = transacoes => {
     const li = document.createElement('li')
 
     li.classList.add(classeCss)
-    li.innerHTML = `
-        <span class="letter-first">${transacoes.name}</span> <span >${operador} R$ ${valorSemOperador}</span><button class="delete-button" title="Excluir" onClick="removerTransacoes(${transacoes.id})"><i class="bi bi-trash"></i></button>
-    `
+    li.innerHTML = `<span class="letter-first">${transacoes.name}</span> <span >${operador} R$ ${valorSemOperador}</span><button class="delete-button" title="Excluir" onClick="removerTransacoes(${transacoes.id})"><i class="bi bi-trash"></i></button> `
+       
     transacaoUl.append(li)
+    
 }
 
 const atualizarValores = () =>{
-    const valorTransacoes = transacao.map(transacoes => transacoes.valor)
+    const valorTransacoes = bdTransacoes.map(transacoes => transacoes.valor)
     const total = valorTransacoes.reduce((acumulador, transacoes) => acumulador + transacoes,0).toFixed(2)
     const renda = valorTransacoes.filter(value => value > 0).reduce((acumulador, value) => acumulador + value,0).toFixed(2)
     const estencao = Math.abs(valorTransacoes.filter(value => value < 0).reduce((acumulador, value) => acumulador + value,0)).toFixed(2)
@@ -43,15 +42,16 @@ const atualizarValores = () =>{
 
 
 const init = () => {
+    
     transacaoUl.innerHTML = ''
-    transacao.forEach(adicionarTransacaoDom)
+    bdTransacoes.forEach(adicionarTransacaoDom)
     atualizarValores()
 }
 
 init()
 
 const atualizarLocalStorage = () => {
-    localStorage.setItem('transacao', JSON.stringify('transacao'))
+    localStorage.setItem('bdTransacoes', JSON.stringify(bdTransacoes))
 }
 
 const aleatorioId = () => Math.round(Math.random() * 1000)
@@ -66,12 +66,12 @@ form.addEventListener('submit', event => {
         return
     }
 
-    const transacoes = { id:aleatorioId(), name: transacoesName, valor: Number(transacoesValor)}
+    const transacao = { id:aleatorioId(), name: transacoesName, valor: Number(transacoesValor)}
 
-    transacao.push(transacoes)  
+    bdTransacoes.push(transacao)  
     init()
     atualizarLocalStorage()
-    
+
     inputName.value = ''
     inputValor.value = ''
 })
