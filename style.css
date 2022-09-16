@@ -24,14 +24,18 @@
     font-family: 'Poppins', sans-serif;
 }
 
-section{
+body{
     background-color: var(--backgroud-one);
+}
+
+section{
+    margin-left: 1rem;
+    margin-right: 1rem;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    min-height: 100vh;
-    
+    min-height: 100vh;    
 }
 
 section::before{
@@ -61,7 +65,7 @@ h1{
     font-size: 2rem;
 }
 .container{
-    width: 450px;
+    max-width: 500px;       
     margin: 30px auto;
     padding: 20px;
     border-radius: 4px;
@@ -240,7 +244,25 @@ input[type='number']::placeholder{
 }
 
 @media (max-width:500px) {
-    section::before{        
+    h1,h2{
+        font-size: 1.5rem;
+    }
+
+    h3{
+        font-size: 1rem;
+    }
+
+    .real{
+        font-size: 1rem;
+    }
+
+    .valor-descricao{
+        display: block;
+        font-size: 11px;
+    }
+
+    section::before{
+        top: 50px;        
         left: -200px;
         width: 800px;
         height: 800px;
